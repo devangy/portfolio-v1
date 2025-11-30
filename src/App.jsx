@@ -7,8 +7,8 @@ import ClickSpark from "./components/Clickspark";
 function App() {
   return (
     <div
-      className="min-h-screen relative scroll-smooth bg-[#16222A] overflow-hidden flex flex-col items-center justify-center"
-      style={{ width: "100%", height: "600px", position: "relative" }}
+      className="min-h-screen relative scroll-smooth bg-[#16222A] overflow-y-auto flex flex-col items-center justify-center scrollbar-hide"
+      style={{ width: "100%", height: "800px", position: "relative" }}
     >
       <ClickSpark
         sparkColor="#fff"
@@ -18,17 +18,18 @@ function App() {
         duration={400}
       >
         {/* Content positioned above particles */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-center p-5">
           <div className="absolute top-0 left-0 right-0 z-20">
             <Header />
           </div>
-          <div className="flex justify-center items-center w-full h-full border-2 border-red-500 p-12">
+          <div className="flex flex-col justify-center items-center w-full h-auto border-2 border-red-500 p-12">
             <div
-              className="flex flex-row lg:flex-row items-center justify-center
-                                        text-yellow-200 w-full max-w-6xl mx-auto gap-10 -mb-11"
+              className="
+    flex lg:flex-row justify-between items-center
+    text-yellow-200 w-full max-w-7xl flex-wrap border-2 border-green-400 md:justify-between
+  p-5 md:mt-28"
             >
               {/* TEXT */}
-              <div className="flex flex-col space-y-5 w-full max-w-md text-center lg:text-left  border-t-zinc-200 mb-[10em] ml-[5rem]">
+              <div className="flex flex-col space-y-4 w-full max-w-md border-2 border-orange-400 p-2 md:mb-10">
                 <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-spacemono z-30">
                   Devang
                 </h1>
@@ -37,33 +38,34 @@ function App() {
                   Yadav
                 </h2>
 
-                {/* <h2 className="text-xl sm:text-2xl md:text-[2em] text-purple-500 font-spacemono">
-                                    FullStack Developer
-                                </h2>*/}
-
-                {/* <h3 className="text-xl sm:text-2xl font-monospace">
-                                    Caffeine {`==>`} Code
-                                </h3>*/}
-                <div className="flex flex-row mt-[10rem] border-2 border-red-500">
-                  <div className="flex p-1 space-x-9 w-[18rem] h-[3rem] justify-around">
-                    <img src="/github.svg"/>
-                    <img src="/linkedin.svg"/>
-                    <img src="/x.svg"/>
-                    <img src="/gmail.svg"/>
-                  </div>
+                {/* SOCIAL ICONS */}
+                <div className="flex items-center p-1 justify-between w-full max-w-[15rem] border-2">
+                  <img className="w-6 sm:w-7 md:w-8" src="/github.svg" />
+                  <img className="w-6 sm:w-7 md:w-8" src="/linkedin.svg" />
+                  <img className="w-6 sm:w-7 md:w-8" src="/x.svg" />
+                  <img className="w-6 sm:w-7 md:w-8" src="/gmail.svg" />
                 </div>
               </div>
 
               {/* IMAGE */}
+              <div className="flex  lg:w-auto lg:justify-end">
                 <img
                   src="/shougan_castle.png"
                   alt="Profile"
-                  className="w-[30rem] h-[22rem] object-cover rounded-tr-3xl rounded-bl-3xl rounded-tl-sm 
-                   hover:scale-105 transition duration-300"
+                  className="
+        w-[38em] max-w-full h-auto object-cover rounded-tr-3xl 
+        rounded-bl-3xl rounded-tl-sm hover:scale-105 transition duration-300
+      "
                 />
+              </div>
+
+              <div className="flex flex-row border-2 p-5 mt-16 font-jetbrains">
+              <p>
+                When I’m not coding, I explore new frameworks, experiment with UI/UX ideas, or dive into system design concepts. I’m always excited to collaborate, build something meaningful, and keep pushing my craft forward.
+              </p>
+            </div>
             </div>
           </div>
-        </div>
 
         {/* Particles positioned absolutely as background */}
         <Particles
