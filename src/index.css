@@ -24,3 +24,16 @@
     font-weight: 700;
     font-style: normal;
 }
+
+@keyframes tilt-wobble {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.05); }
+  50% { transform: rotate(10deg) scale(1.05); }
+  75% { transform: rotate(-6deg) scale(1.03); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+.tilt-wobble-hover:hover {
+  animation: tilt-wobble 0.5s ease-in-out;
+}
+
