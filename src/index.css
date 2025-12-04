@@ -4,36 +4,73 @@
 
 /* Enable ligatures for Fira Code */
 .font-ligatures {
-    font-variant-ligatures: common-ligatures;
+  font-variant-ligatures: common-ligatures;
 }
 
 /* Custom Styles */
 :root {
-    background-color: #172554; /* Example color */
+  background-color: #172554; /* Example color */
 }
 
 @font-face {
-    font-family: "Space Mono";
-    src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Space Mono";
+  src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
 @font-face {
-    font-family: "MyFont";
-    src: url("/fonts/MyFont-Bold.woff2") format("truetype");
-    font-weight: 700;
-    font-style: normal;
+  font-family: "MyFont";
+  src: url("/fonts/MyFont-Bold.woff2") format("truetype");
+  font-weight: 700;
+  font-style: normal;
 }
 
 @keyframes tilt-wobble {
-  0% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(-10deg) scale(1.05); }
-  50% { transform: rotate(10deg) scale(1.05); }
-  75% { transform: rotate(-6deg) scale(1.03); }
-  100% { transform: rotate(0deg) scale(1); }
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(-10deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.05);
+  }
+  75% {
+    transform: rotate(-6deg) scale(1.03);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
 }
 
 .tilt-wobble-hover:hover {
   animation: tilt-wobble 0.5s ease-in-out;
 }
 
+.glass-card {
+  background: linear-gradient(
+    135deg, 
+    rgba(27, 22, 22, 0.37) 0%, 
+    rgba(19, 20, 21, 0.371) 100%
+  );
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  /* background: rgba(11, 133, 214, 0.1); */
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+@keyframes rgb-fade-soft {
+  0%   { color: #fee2e2; }   /* red-100 */
+  20%  { color: #fef9c3; }   /* yellow-100 */
+  40%  { color: #d9f99d; }   /* lime-100 */
+  60%  { color: #bfdbfe; }   /* blue-100 */
+  80%  { color: #f5d0fe; }   /* purple-100 */
+  100% { color: #fee2e2; }   /* red-100 */
+}
+
+.rgb-fade-soft {
+  animation: rgb-fade-soft 4s linear infinite;
+}
