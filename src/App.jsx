@@ -65,25 +65,25 @@ function App() {
               <div className="flex items-center p-1 justify-between w-full max-w-[15rem]">
                 <img
                   className="w-6 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover"
-                  src="/src/assets/github.svg"
+                  src="./src/assets/github.svg"
                   draggable="false"
                   alt="GitHub"
                 />
 
                 <img
                   className="w-6 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover"
-                  src="/src/assets/linkedin.svg"
+                  src="./src/assets/linkedin.svg"
                   // draggable="false"
                   alt="LinkedIn"
                 />
                 <img
                   className="w-8 sm:w-7 md:w-8 transition tilt-wobble-hover duration-400 "
-                  src="/src/assets/x.svg"
+                  src="./src/assets/x.svg"
                   alt="X"
                 />
                 <img
                   className="w-6 sm:w-7 md:w-8 tilt-wobble-hover transition duration-400 "
-                  src="/src/assets/gmail.svg"
+                  src="./src/assets/gmail.svg"
                   alt="Gmail"
                 />
               </div>
@@ -92,7 +92,7 @@ function App() {
             {/* IMAGE */}
             <div className="flex lg:w-auto lg:justify-end select-none pointer-events-none">
               <img
-                src="/src/assets/shougan_castle.png"
+                src="./src/assets/shougan_castle.png"
                 alt="Profile"
                 draggable="false"
                 className="
@@ -182,7 +182,7 @@ function App() {
                 <div className="flex flex-row  h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Javascript</span>
                   <img
-                    src="/skills/javascript.svg"
+                    src="src/assets/skills/javascript.svg"
                     alt="JS-icon"
                     className="w-full h-full object-contain "
                   />
@@ -190,7 +190,7 @@ function App() {
                 <div className="flex flex-row border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Typescript</span>
                   <img
-                    src="/skills/typescript-icon.svg"
+                    src="src/assets/skills/typescript-icon.svg"
                     alt="JS-icon"
                     className="w-full h-full object-contain rounded-lg "
                   />
@@ -198,7 +198,7 @@ function App() {
                 <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-white/80">
                   <span>Python</span>
                   <img
-                    src="/skills/python.svg"
+                    src="src/assets/skills/python.svg"
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -206,7 +206,7 @@ function App() {
                 <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300  border-white/80 ">
                   <span>React</span>
                   <img
-                    src="/skills/react.svg"
+                    src="src/assets/skills/react.svg"
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -215,7 +215,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 w-54 space-between items-center p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>React Native</span>
                   <img
-                    src="/skills/react.svg"
+                    src="./assets/skills/react.svg"
                     alt="JS-icon"
                     className="w-15 h-full object-contain pl-5"
                   />
@@ -223,7 +223,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>NextJS</span>
                   <img
-                    src="/skills/nextjs-icon.svg"
+                    src="src/assets/skills/nextjs-icon.svg"
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -231,7 +231,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>NodeJS</span>
                   <img
-                    src="/skills/nodejs-icon.svg"
+                    src="src/assets/skills/nodejs-icon.svg"
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -239,7 +239,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Tailwind CSS</span>
                   <img
-                    src="/skills/tailwindcss-icon.svg"
+                    src="src/assets/skills/tailwindcss-icon.svg"
                     alt="JS-icon"
                     className="w-50 h-full object-contain"
                   />

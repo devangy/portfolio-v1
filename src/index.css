@@ -53,10 +53,7 @@
     rgba(27, 22, 22, 0.37) 0%, 
     rgba(19, 20, 21, 0.371) 100%
   );
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
   /* background: rgba(11, 133, 214, 0.1); */
-  backdrop-filter: blur(4px);
   position: relative;
   overflow: hidden;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
