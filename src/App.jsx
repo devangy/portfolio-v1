@@ -65,25 +65,25 @@ function App() {
               <div className="flex items-center p-1 justify-between w-full max-w-[15rem]">
                 <img
                   className="w-6 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover"
-                  src="/github.svg"
+                  src="/src/assets/github.svg"
                   draggable="false"
                   alt="GitHub"
                 />
 
                 <img
                   className="w-6 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover"
-                  src="/linkedin.svg"
+                  src="/src/assets/linkedin.svg"
                   // draggable="false"
                   alt="LinkedIn"
                 />
                 <img
                   className="w-8 sm:w-7 md:w-8 transition tilt-wobble-hover duration-400 "
-                  src="/x.svg"
+                  src="/src/assets/x.svg"
                   alt="X"
                 />
                 <img
                   className="w-6 sm:w-7 md:w-8 tilt-wobble-hover transition duration-400 "
-                  src="/gmail.svg"
+                  src="/src/assets/gmail.svg"
                   alt="Gmail"
                 />
               </div>
@@ -92,7 +92,7 @@ function App() {
             {/* IMAGE */}
             <div className="flex lg:w-auto lg:justify-end select-none pointer-events-none">
               <img
-                src="/shougan_castle.png"
+                src="/src/assets/shougan_castle.png"
                 alt="Profile"
                 draggable="false"
                 className="
