@@ -6,6 +6,19 @@ import Particles from "./components/Particles";
 import ElectricBorder from "./components/ElectricBorder";
 import { SquareArrowOutUpRight } from "lucide-react";
 import { useState } from "react";
+import github from "./assets/github.svg";
+import twitter from "./assets/x.svg";
+import gmail from "./assets/gmail.svg";
+import linkedin from "./assets/linkedin.svg";
+import castle from "./assets/castle.png";
+import js from "./assets/skills/javascript.svg";
+import ts from "./assets/skills/typescript-icon.svg";
+import node from "./assets/skills/nodejs-icon.svg";
+import python from "./assets/skills/python.svg";
+import react from "././assets/skills/react.svg";
+import postgres from "./assets/skills/postgresql.svg";
+import talwind from "./assets/skills/tailwindcss-icon.svg";
+import nextjs from "./assets/skills/nextjs-icon.svg";
 
 function App() {
   const [expandIntro, setIntro] = useState(true);
@@ -65,25 +78,25 @@ function App() {
               <div className="flex items-center p-1 justify-between w-full max-w-[15rem]">
                 <img
                   className="w-6 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover"
-                  src="./src/assets/github.svg"
+                  src={github}
                   draggable="false"
                   alt="GitHub"
                 />
 
                 <img
                   className="w-6 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover"
-                  src="./src/assets/linkedin.svg"
+                  src={linkedin}
                   // draggable="false"
                   alt="LinkedIn"
                 />
                 <img
                   className="w-8 sm:w-7 md:w-8 transition tilt-wobble-hover duration-400 "
-                  src="./src/assets/x.svg"
+                  src={twitter}
                   alt="X"
                 />
                 <img
                   className="w-6 sm:w-7 md:w-8 tilt-wobble-hover transition duration-400 "
-                  src="./src/assets/gmail.svg"
+                  src={gmail}
                   alt="Gmail"
                 />
               </div>
@@ -92,8 +105,8 @@ function App() {
             {/* IMAGE */}
             <div className="flex lg:w-auto lg:justify-end select-none pointer-events-none">
               <img
-                src="./src/assets/shougan_castle.png"
-                alt="Profile"
+                src={castle}
+                alt="castle_image"
                 draggable="false"
                 className="
         w-[38em] max-w-full h-auto object-cover rounded-tr-3xl
@@ -182,7 +195,7 @@ function App() {
                 <div className="flex flex-row  h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Javascript</span>
                   <img
-                    src="src/assets/skills/javascript.svg"
+                    src={js}
                     alt="JS-icon"
                     className="w-full h-full object-contain "
                   />
@@ -190,7 +203,7 @@ function App() {
                 <div className="flex flex-row border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Typescript</span>
                   <img
-                    src="src/assets/skills/typescript-icon.svg"
+                    src={ts}
                     alt="JS-icon"
                     className="w-full h-full object-contain rounded-lg "
                   />
@@ -198,7 +211,7 @@ function App() {
                 <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-white/80">
                   <span>Python</span>
                   <img
-                    src="src/assets/skills/python.svg"
+                    src={python}
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -206,7 +219,7 @@ function App() {
                 <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300  border-white/80 ">
                   <span>React</span>
                   <img
-                    src="src/assets/skills/react.svg"
+                    src={react}
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -215,7 +228,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 w-54 space-between items-center p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>React Native</span>
                   <img
-                    src="./assets/skills/react.svg"
+                    src={react}
                     alt="JS-icon"
                     className="w-15 h-full object-contain pl-5"
                   />
@@ -223,7 +236,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>NextJS</span>
                   <img
-                    src="src/assets/skills/nextjs-icon.svg"
+                    src={nextjs}
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -231,7 +244,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>NodeJS</span>
                   <img
-                    src="src/assets/skills/nodejs-icon.svg"
+                    src={node}
                     alt="JS-icon"
                     className="w-full h-full object-contain"
                   />
@@ -239,7 +252,7 @@ function App() {
                 <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg backdrop-blur-md bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Tailwind CSS</span>
                   <img
-                    src="src/assets/skills/tailwindcss-icon.svg"
+                    src={talwind}
                     alt="JS-icon"
                     className="w-50 h-full object-contain"
                   />
@@ -293,12 +306,8 @@ function App() {
               {/* PROJECTS  */}
               <div className="mt-20">
                 <h4 className="flex text-4xl text-yellow-100 mb-8">Projects</h4>
-                 <div className="flex flex-row border-2 w-full h-[50rem] ">
-                
+                <div className="flex flex-row border-2 w-full h-[50rem] "></div>
               </div>
-
-              </div>
-             
             </div>
           </div>
         </div>
