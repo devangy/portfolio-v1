@@ -71,6 +71,10 @@
   100% { color: #fee2e2; }   /* red-100 */
 }
 
-.rgb-fade-soft {
-  animation: rgb-fade-soft 4s linear infinite;
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
