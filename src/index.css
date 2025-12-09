@@ -9,7 +9,7 @@
 
 /* Custom Styles */
 :root {
-  background-color: #172554; /* Example color */
+  background-color: #162a2a; /* Example color */
 }
 
 @font-face {
@@ -17,13 +17,37 @@
   src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
+
 @font-face {
-  font-family: "MyFont";
-  src: url("/fonts/MyFont-Bold.woff2") format("truetype");
-  font-weight: 700;
+  font-family: "Geist Mono";
+  src: local("Geist Mono"), local("GeistMono-Regular"),
+       url("/fonts/GeistMono-Regular.ttf") format("truetype");
+  font-weight: 200;
   font-style: normal;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: "Geist Mono";
+  src: local("GeistMono-Light"),
+       url("/fonts/GeistMono-Light.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: local("GeistMono-Medium"),
+       url("/fonts/GeistMono-Medium.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 
 @keyframes tilt-wobble {
   0% {
@@ -43,21 +67,13 @@
   }
 }
 
+
+
 .tilt-wobble-hover:hover {
   animation: tilt-wobble 0.5s ease-in-out;
 }
 
-.glass-card {
-  background: linear-gradient(
-    135deg, 
-    rgba(27, 22, 22, 0.37) 0%, 
-    rgba(19, 20, 21, 0.371) 100%
-  );
-  /* background: rgba(11, 133, 214, 0.1); */
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-}
+
 
 @keyframes rgb-fade-soft {
   0%   { color: #fee2e2; }   /* red-100 */
@@ -68,10 +84,7 @@
   100% { color: #fee2e2; }   /* red-100 */
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
+.rgb-fade-soft {
+  animation: rgb-fade-soft 8s ease-in-out infinite;
 }
-.scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
+

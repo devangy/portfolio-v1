@@ -27,11 +27,11 @@ const Navbar = () => {
             className="relative mx-auto h-15 flex items-center w-fit rounded-full hover:border-2 border-white-50 hover:shadow-custom bg-[#212121] brightness-100 contrast-25 font-jetbrains gap-6 pl-0.5 pr-0.5"
         >
             <Tab setPosition={setPosition}>Home</Tab>
-            <span className="text-stone-50  brigtness-100 contrast-25 text-3xl ">
+            <span className="text-stone-50  brigtness-100 contrast-25 text-3xl font-jetbrains">
                 {" ==> "}
             </span>
             <Tab setPosition={setPosition}>Projects</Tab>
-            <span className="text-stone-50 brigtness-100 contrast-25 text-3xl ">
+            <span className="text-stone-50 brigtness-100 contrast-25 text-3xl font-jetbrains">
                 {" ==> "}
             </span>
             <Tab setPosition={setPosition}>Work</Tab>
@@ -64,6 +64,7 @@ const Tab = ({ children, setPosition }) => {
     );
 };
 
+// eslint-disable-next-line react/prop-types
 const Cursor = ({ position }) => {
     return (
         <motion.li

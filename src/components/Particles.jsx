@@ -1,5 +1,8 @@
 import { useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Renderer, Camera, Geometry, Program, Mesh } from 'ogl';
+
+import './Particles.css';
 
 const defaultColors = ['#ffffff', '#ffffff', '#ffffff'];
 
@@ -84,7 +87,7 @@ const fragment = /* glsl */ `
 `;
 
 const Particles = ({
-  particleCount = 200,
+  particleCount = 100,
   particleSpread = 10,
   speed = 0.1,
   particleColors,
@@ -236,7 +239,22 @@ const Particles = ({
     pixelRatio
   ]);
 
-  return <div ref={containerRef} className={`relative w-full h-full ${className}`} />;
+  return <div ref={containerRef} className={`particles-container ${className}`} />;
+};
+Particles.propTypes = {
+  particleCount: PropTypes.number,
+  particleSpread: PropTypes.number,
+  speed: PropTypes.number,
+  particleColors: PropTypes.arrayOf(PropTypes.string),
+  moveParticlesOnHover: PropTypes.bool,
+  particleHoverFactor: PropTypes.number,
+  alphaParticles: PropTypes.bool,
+  particleBaseSize: PropTypes.number,
+  sizeRandomness: PropTypes.number,
+  cameraDistance: PropTypes.number,
+  disableRotation: PropTypes.bool,
+  pixelRatio: PropTypes.number,
+  className: PropTypes.string
 };
 
 export default Particles;
