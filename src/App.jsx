@@ -206,7 +206,7 @@ function App() {
                 {/* <span className="animate-bounce text-green-300">➜</span> */}
                 Techstack
               </h2>
-              <div className="flex flex-row  mt-5 flex-wrap gap-2 text-purple-100 text-lg bg-transparent font-code leading-relaxed">
+              <div className="flex flex-row  mt-5 flex-wrap gap-2 text-purple-100 text-lg bg-transparent font-code leading-relaxed  gap-y-3">
                 <div className="flex flex-row  h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Javascript</span>
                   <img
@@ -280,7 +280,7 @@ function App() {
                     className="w-full h-full object-contain"
                   />
                 </div>
-                <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                <div className="flex flex-row  border-white h-12 text-nowrap justify-center items-center gap-5 p-2 rounded-lg bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80 ">
                   <span>React Query</span>
                   <img
                     src={reactquery}
