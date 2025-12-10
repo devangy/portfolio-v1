@@ -18,7 +18,7 @@ import react from "././assets/skills/react.svg";
 import postgres from "./assets/skills/postgresql.svg";
 import tailwind from "./assets/skills/tailwindcss-icon.svg";
 import nextjs from "./assets/skills/nextjs-icon.svg";
-import castle from "/public/castle.webp";
+import castle from "/castle.webp";
 import { Meteors } from "./components/Meteors";
 
 function App() {
