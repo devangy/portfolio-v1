@@ -18,6 +18,17 @@ import react from "././assets/skills/react.svg";
 import postgres from "./assets/skills/postgresql.svg";
 import tailwind from "./assets/skills/tailwindcss-icon.svg";
 import nextjs from "./assets/skills/nextjs-icon.svg";
+import docker from "./assets/skills/docker.svg";
+import fedora from "./assets/skills/fedora.svg";
+import nginx from "./assets/skills/nginx.svg";
+import redux from "./assets/skills/redux.svg";
+import reactquery from "./assets/skills/react-query.svg";
+import prisma from "./assets/skills/prisma.svg";
+import aws from "./assets/skills/aws.svg";
+import bash from "./assets/skills/bash.svg";
+import go from "./assets/skills/go.svg";
+import cloudflare from "./assets/skills/cloudflare.svg";
+
 import castle from "./assets/images/shougan_castle.webp";
 import { Meteors } from "./components/Meteors";
 
@@ -220,6 +231,14 @@ function App() {
                     className="w-full h-full object-contain"
                   />
                 </div>
+                <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-white/80">
+                  <span>Golang</span>
+                  <img
+                    src={go}
+                    alt="JS-icon"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300  border-white/80 ">
                   <span>React</span>
                   <img
@@ -253,6 +272,22 @@ function App() {
                     className="w-full h-full object-contain"
                   />
                 </div>
+                <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>Redux</span>
+                  <img
+                    src={redux}
+                    alt="JS-icon"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>React Query</span>
+                  <img
+                    src={reactquery}
+                    alt="JS-icon"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
                 <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
                   <span>Tailwind CSS</span>
                   <img
@@ -265,6 +300,62 @@ function App() {
                   <span>PostgreSQL</span>
                   <img
                     src={postgres}
+                    alt="JS-icon"
+                    className="w-50 h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>Prisma</span>
+                  <img
+                    src={prisma}
+                    alt="JS-icon"
+                    className="w-50 h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>Docker</span>
+                  <img
+                    src={docker}
+                    alt="JS-icon"
+                    className="w-50 h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>AWS</span>
+                  <img
+                    src={aws}
+                    alt="JS-icon"
+                    className="w-50 h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>Cloudflare</span>
+                  <img
+                    src={cloudflare}
+                    alt="JS-icon"
+                    className="w-50 h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>Fedora</span>
+                  <img
+                    src={fedora}
+                    alt="JS-icon"
+                    className="w-50 h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>Nginx</span>
+                  <img
+                    src={nginx}
+                    alt="JS-icon"
+                    className="w-50 h-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
+                  <span>Bash</span>
+                  <img
+                    src={bash}
                     alt="JS-icon"
                     className="w-50 h-full object-contain"
                   />
