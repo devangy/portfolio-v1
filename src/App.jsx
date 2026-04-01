@@ -1,9 +1,11 @@
-// src/App.jsx
-import { Header } from "./components/Header";
-import "./index.css";
-import ElectricBorder from "./components/ElectricBorder";
-import { SquareArrowOutUpRight } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { SquareArrowOutUpRight } from "lucide-react";
+import Mandala from "./components/Mandala";
+import AsciiArt from "./components/AsciiArt";
+import { Meteors } from "./components/Meteors";
+import "./index.css";
+
 import github from "./assets/github.svg";
 import twitter from "./assets/x.svg";
 import gmail from "./assets/gmail.svg";
@@ -12,7 +14,7 @@ import js from "./assets/skills/javascript.svg";
 import ts from "./assets/skills/typescript-icon.svg";
 import node from "./assets/skills/nodejs-icon.svg";
 import python from "./assets/skills/python.svg";
-import react from "././assets/skills/react.svg";
+import react from "./assets/skills/react.svg";
 import postgres from "./assets/skills/postgresql.svg";
 import tailwind from "./assets/skills/tailwindcss-icon.svg";
 import nextjs from "./assets/skills/nextjs-icon.svg";
@@ -27,476 +29,426 @@ import bash from "./assets/skills/bash.svg";
 import go from "./assets/skills/go.svg";
 import cloudflare from "./assets/skills/cloudflare.svg";
 
-import castle from "./assets/images/w5.webp";
-import { Meteors } from "./components/Meteors";
+const skills = [
+  { name: "Javascript", icon: js },
+  { name: "Typescript", icon: ts },
+  { name: "Python", icon: python },
+  { name: "Golang", icon: go },
+  { name: "React", icon: react },
+  { name: "React Native", icon: react },
+  { name: "Next.js", icon: nextjs },
+  { name: "Node.js", icon: node },
+  { name: "Redux", icon: redux },
+  { name: "React Query", icon: reactquery },
+  { name: "Tailwind CSS", icon: tailwind },
+  { name: "PostgreSQL", icon: postgres },
+  { name: "Prisma", icon: prisma },
+  { name: "Docker", icon: docker },
+  { name: "AWS", icon: aws },
+  { name: "Cloudflare", icon: cloudflare },
+  { name: "Fedora", icon: fedora },
+  { name: "Nginx", icon: nginx },
+  { name: "Bash", icon: bash },
+];
+
+const socials = [
+  { icon: github, url: "https://github.com/devangy", label: "GitHub" },
+  { icon: linkedin, url: "https://www.linkedin.com/in/devangy", label: "LinkedIn" },
+  { icon: twitter, url: "https://x.com/devangy", label: "X" },
+  { icon: gmail, url: "mailto:d3vang@gmail.com", label: "Email" },
+];
+
+const projects = [
+  {
+    name: "Beacon",
+    url: "https://github.com/devangy/Beacon",
+    desc: "Beacon is a real-time chat application I built to explore websockets for bidirectional communication. It uses Socket.io to handle instant messaging with minimal latency. PostgreSQL database to persist message history, ensuring conversations aren\u2019t lost when a user refreshes. Implemented Github OAuth to handle authentication and seamless login. Designed a mobile-first, responsive UI in React, optimizing the chat experience for performance and usability on both desktop and mobile devices.",
+  },
+  {
+    name: "DataLog",
+    url: "https://github.com/devangy/market",
+    desc: "DataLog is a Telegram Bot built with Golang and Telego. It provides notification alerts on new events with volume and whale alerts for tracking whale movements across two prediction markets Kalshi and Polymarket. It uses concurrent API polling system using goroutines, channels, and backoff retry logic to get contracts prices from both markets simultaneously. To prevent duplicates it uses a hashmap and automatically discards duplicates by comparing hashes.",
+  },
+  {
+    name: "LucidLines",
+    url: "https://github.com/devangy/LucidLines",
+    desc: "LucidLines is a full-stack blogging platform with powerful admin management tools. I built the backend with Node.js and Express, PostgreSQL and Prisma ORM for queries, focusing on creating clean, efficient RESTful APIs to handle user data and Cloudinary for image uploads. Implemented full CRUD functionality, enabling users to publish, edit, and delete blogs, as well as engage through comments and likes.",
+  },
+];
+
+// Terminal prompt component
+const Prompt = ({ command, className = "" }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.4 }}
+    viewport={{ once: true, margin: "-40px" }}
+    className={`flex items-center gap-1.5 font-jetbrains text-sm mb-6 ${className}`}
+  >
+    <span className="text-indian-green">devang</span>
+    <span className="text-white/25">@</span>
+    <span className="text-saffron">mumbai</span>
+    <span className="text-white/25">:</span>
+    <span className="text-cyan-400">~</span>
+    <span className="text-white/25">$</span>
+    <span className="text-white/60 ml-1">{command}</span>
+    <span className="terminal-cursor ml-0.5">&#9610;</span>
+  </motion.div>
+);
+
+// Rangoli-inspired section divider
+const Divider = () => (
+  <div className="flex items-center justify-center gap-2 py-20 opacity-25">
+    <div className="h-px w-20 bg-gradient-to-r from-transparent to-saffron" />
+    <div className="w-1.5 h-1.5 rotate-45 border border-saffron" />
+    <div className="w-2 h-2 rounded-full border border-indian-green" />
+    <div className="w-1.5 h-1.5 rotate-45 border border-saffron" />
+    <div className="h-px w-20 bg-gradient-to-l from-transparent to-saffron" />
+  </div>
+);
+
+// Fade-in wrapper
+const FadeIn = ({ children, delay = 0, className = "" }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 24 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6, delay }}
+    viewport={{ once: true, margin: "-60px" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
 
 function App() {
   const [expandIntro, setIntro] = useState(false);
+  const [activeTab, setActiveTab] = useState("home");
+
+  const scrollTo = (id) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
-    <div
-      className="h-auto bg-[#162a2a] flex flex-col items-center"
-      style={{ width: "100%", position: "relative" }}
-    >
-      {/* Header*/}
-      <div className="w-full z-20 -mt-4 hidden sm:block">
-        <Header />
-      </div>
-
-      {/* Main content*/}
-      <div className="flex flex-col items-center w-full select-none ">
-        {/* Content  */}
-        <div
-          className="
-            flex lg:flex-row justify-between items-center
-            text-yellow-200 w-full max-w-6xl flex-wrap md:justify-between
-            p-5 relative z-10 mt-12 lg:space-y-12
-            md:min-h-screen md:h-auto space-y-14
-          "
-        >
-          {/* TEXT */}
-          <div className="flex flex-col space-y-8 w-full max-w-md p-2 md:mb-10 lg:-mt-[3em]">
-            <h1 className="lg:rgb-fade-soft text-7xl md:text-7xl -ml-1 lg:text-[5.5rem] font-spacemono leading-loose z-30 text-lime-100 animate rgb-fade-soft">
-              Devang
-            </h1>
-            <h2 className="sm:text-4xl md:text-3xl mt-2 lg:text-[2rem] font-spacemono z-20 text-amber-100 text-4xl mb-8">
-              Fullstack Dev
-            </h2>
-            {/* SOCIAL ICONS */}
-            <div className="flex items-center p-1 justify-between w-full max-w-[15rem] ">
-              <img
-                className="w-8 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover "
-                src={github}
-                draggable="false"
-                alt="GitHub"
-                onClick={() =>
-                  window.open("https://github.com/devangy", "_blank")
-                }
-              />
-              <img
-                className="w-8 sm:w-7 md:w-8  transition duration-400 tilt-wobble-hover"
-                src={linkedin}
-                alt="LinkedIn"
-                onClick={() =>
-                  window.open("https://www.linkedin.com/in/devangy", "_blank")
-                }
-              />
-              <img
-                className="w-8 sm:w-7 md:w-8 transition  duration-400 tilt-wobble-hover"
-                src={twitter}
-                alt="X"
-                onClick={() =>
-                  window.open("https://github.com/devangy", "_blank")
-                }
-              />
-              <img
-                className="w-8 sm:w-7 md:w-8 tilt-wobble-hover transition duration-400 "
-                src={gmail}
-                alt="Gmail"
-                onClick={() =>
-                  window.open(
-                    "mailto:d3vang@gmail.com?subject=Subject&body=Body%20goes%20here",
-                    "_blank"
-                  )
-                }
-              />
-            </div>
+    <div className="min-h-screen bg-[#0a0a0a] text-[#e4e4e7] font-jetbrains scanline">
+      {/* ══════ Terminal Chrome ══════ */}
+      <nav className="sticky top-0 z-50 bg-[#0f0f0f]/95 backdrop-blur-md border-b border-white/[0.06]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center">
+          {/* Traffic lights */}
+          <div className="flex gap-2 mr-4">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+            <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#28c840]" />
           </div>
-          {/* IMAGE */}
-          <div className="flex lg:w-auto lg:justify-end select-none pointer-events-none ">
-            <img
-              src={castle}
-              alt="sky_image"
-              draggable="false"
-              className="
-                w-[38em] max-w-full h-auto object-fill rounded-lg
-                hover:scale-105 transition duration-300 select-none z-50
-              "
-            />
+
+          {/* Tabs */}
+          <div className="hidden sm:flex items-center gap-1 text-xs font-mono">
+            {[
+              { id: "home", label: "~/home" },
+              { id: "skills", label: "~/skills" },
+              { id: "experience", label: "~/work" },
+              { id: "projects", label: "~/projects" },
+            ].map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => { setActiveTab(tab.id); scrollTo(tab.id); }}
+                className={`px-3 py-1.5 rounded-t-md transition-colors ${
+                  activeTab === tab.id
+                    ? "bg-white/[0.06] text-saffron border-b-2 border-saffron"
+                    : "text-white/30 hover:text-white/60 hover:bg-white/[0.03]"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
-          <div className="flex font-jetbrains bg-[#1F2121] mt-32">
-            <ElectricBorder
-              color="#E619B8"
-              speed={0.5}
-              chaos={0.1}
-              thickness={2}
-              style={{ borderRadius: 5 }}
-              className="transition-transform"
-            >
-              <div className="text-slate-200 leading-relaxed font-mono text-xl">
-                <p style={{ margin: 0, padding: 20 }} className="mx-auto">
-                  Hey!, My name is{" "}
-                  <span className="text-green-300">Devang Yadav</span> a
-                  fullstack developer based in{" "}
-                  <span className="text-red-300">Mumbai</span>,{" "}
-                  <span className="text-orange-300">In</span>
-                  <span className="text-white">di</span>
-                  <span className="text-green-300">a</span>. My journey started
-                  in 2023 learning {"<html>"}, CSS and eventually transitioning
-                  to Javascript and other frameworks for building web and mobile
-                  applications. One of the major resource that helped me a lot
-                  and I&apos;m thankful for was{" "}
-                  <span className="text-blue-300">
-                    The Odin Project - a opensource curriculum
-                  </span>{" "}
-                  for web development, the struggle was real with Javascript
-                  section spending time thinking and tinkering around and
-                  understanding the concepts which at that time seemed hard but
-                  with persistency I overcame it.
-                  {!expandIntro && (
-                    <span
-                      className="inline-flex w-32  mt-1 ml-2 bg-zinc-900 rounded-lg justify-center items-center hover:text-green-300 hover:bg-zinc-950 cursor-pointer hover:scale-105 border "
-                      onClick={() => setIntro(true)}
-                    >
-                      Expand...
-                    </span>
-                  )}
-                  {expandIntro && (
-                    <>
-                      {" "}
-                      It helped me distinguish between project based learning
-                      and tutorial hell early on. I always wanted to build stuff
-                      whether it was apps, lego house or my own physique since I
-                      was little but never really got into it seriously until
-                      college instead that time was wasted playing Counter
-                      Strike 10k hours lol regrets but it was fun. I&apos;m
-                      always learning new technologies and reading about
-                      finance, markets etc. My core interests lie in Blockchain
-                      as I think Decentralization and smart contracts are the
-                      future. Systems programming is something I wanna get into
-                      and write my own Operating System someday for fun
-                      something like Temple OS, Reverse engineering and malware
-                      analysis is another topic that I find interesting to read
-                      about.
-                      <span
-                        className="inline-flex w-20 text-xl ml-2 bg-zinc-900 rounded-lg justify-start p-2 h-10 items-center text-red-400 hover:bg-black hover:text-white cursor-pointer font-mono border"
-                        onClick={() => setIntro(false)}
-                      >
-                        {"Close"}
-                      </span>
-                    </>
-                  )}
-                </p>
-              </div>
-            </ElectricBorder>
-          </div>
-          {/* SKILLS */}
-          <div className="flex flex-col font-mono w-full p-1 mt-24">
-            <h2 className="text-4xl font-jetbrains text-yellow-100 ">
-              {/* <span className="animate-bounce text-green-300">➜</span> */}
-              Techstack
-            </h2>
-            <div className="flex flex-row  mt-5 flex-wrap gap-2 text-purple-100 text-lg bg-transparent font-code leading-relaxed  gap-y-3">
-              <div className="flex flex-row  h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Javascript</span>
-                <img
-                  src={js}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain "
-                />
-              </div>
-              <div className="flex flex-row border-white h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Typescript</span>
-                <img
-                  src={ts}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain rounded-lg "
-                />
-              </div>
-              <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-white/80">
-                <span>Python</span>
-                <img
-                  src={python}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-white/80">
-                <span>Golang</span>
-                <img
-                  src={go}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row border-2 border-white h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300  border-white/80 ">
-                <span>React</span>
-                <img
-                  src={react}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
 
-              <div className="flex flex-row  border-white h-12 w-54 space-between items-center p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>React Native</span>
-                <img
-                  src={react}
-                  alt="JS-icon"
-                  className="w-15 h-full object-contain pl-5"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>NextJS</span>
-                <img
-                  src={nextjs}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>NodeJS</span>
-                <img
-                  src={node}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 justify-center items-center gap-5 p-2 rounded-lg bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Redux</span>
-                <img
-                  src={redux}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 text-nowrap justify-center items-center gap-5 p-2 rounded-lg bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80 ">
-                <span>React Query</span>
-                <img
-                  src={reactquery}
-                  alt="JS-icon"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Tailwind CSS</span>
-                <img
-                  src={tailwind}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>PostgreSQL</span>
-                <img
-                  src={postgres}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Prisma</span>
-                <img
-                  src={prisma}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Docker</span>
-                <img
-                  src={docker}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>AWS</span>
-                <img
-                  src={aws}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Cloudflare</span>
-                <img
-                  src={cloudflare}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Fedora</span>
-                <img
-                  src={fedora}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Nginx</span>
-                <img
-                  src={nginx}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-row  border-white h-12 w-50 justify-center items-center gap-5 p-2 rounded-lg  bg-white/1 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 border-2 border-white/80">
-                <span>Bash</span>
-                <img
-                  src={bash}
-                  alt="JS-icon"
-                  className="w-50 h-full object-contain"
-                />
-              </div>
-            </div>
-            {/* EXPERIENCE */}
-            <div className="flex flex-col font-code text-yellow-100 p-2 mt-28  flex-shrink">
-              <h3 className="text-4xl font-jetbrains">Experience</h3>
-
-              <div className="flex flex-col bg-slate-950 w-full  mt-8 rounded-xl p-2 font-jetbrains leading-relaxed md: h-auto border-2">
-                <div className="flex text-white leading-normal text-4xl w-full items-start ">
-                  <div className="flex flex-row w-full items-center border-b border-white pb-2 ">
-                    <div className="flex w-full justify-between text-sky-100 items-center flex-wrap">
-                      <div className="flex justify-between">
-                        <span className="text-emerald-400 animate-pulse sm:block hidden ">
-                          ➜
-                        </span>
-                        <span className="ml-2">Vighnotech</span>
-                        <span className="ml-2 text-green-100 tilt-wobble-hover p-2">
-                          <a
-                            href={"https://vighnotech.com"}
-                            target="_blank" // Opens the link in a new tab
-                            rel="noopener noreferrer"
-                            className="text-green-200 hover:text-green-200"
-                          >
-                            <SquareArrowOutUpRight
-                              size={30}
-                              link="https://chatgpt.com"
-                              className="z-50  hover:scale-110 mt-1 text-white hover:text-green-300 border rounded-md sm:ml-2  md:ml-4"
-                            />
-                          </a>
-                        </span>
-                      </div>
-
-                      <div className="flex justify-end min-w-0 text-nowrap text-blue-200 text-2xl leading-relaxed mt-2 ml-2">
-                        [02-2025 - 07-2025]
-                      </div>
-                    </div>
-                    {/* <div className="flex justify-end min-w-0 text-nowrap text-blue-200 text-2xl leading-relaxed">
-                        [02-2025 - 07-2025]
-                      </div> */}
-                  </div>
-                </div>
-
-                <div className="flex flex-row mt-4 p-2 text-xl leading-relaxed text-green-300">
-                  My professional experience covers a range of projects, from
-                  developing user-facing applications using React and React
-                  Native to architecting the underlying backend services and CRM
-                  systems with Node.js and PostgreSQL. I was primarily
-                  responsible for creating and sustaining business automation
-                  tools and custom CRM solutions that drove efficiency for
-                  clients in various industries.
-                </div>
-              </div>
-            </div>
-
-            {/* PROJECTS */}
-            <div className="relative flex flex-col  space-y-16  w-full h-auto  overflow-hidden p-2  mt-20">
-              <h3 className="text-4xl text-yellow-100 -mb-10">Projects</h3>
-
-              <div className="flex flex-col space-x-3 w-full h-auto relative overflow-hidden justify-around bg-black rounded-lg  border-2 ">
-                <div className="flex flex-row justify-between items-center text-white font-spacemono  w-full  z-10 ">
-                  <div className="flex flex-row items-center justify-start p-2 border-b w-full ">
-                    <span className="text-[2.8em] ml-2 text-cyan-400">
-                      Beacon
-                      <a
-                        href="https://github.com/devangy/Beacon"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block align-middle"
-                      >
-                        <SquareArrowOutUpRight
-                          size={32}
-                          className="z-50 tilt-wobble-hover hover:scale-110 ml-10 -mt-1 hover:text-green-300 text-white border rounded-md "
-                        />
-                      </a>
-                    </span>
-                  </div>
-                </div>
-                <div className="flex font-jetbrains text-green-300 text-xl p-2 leading-relaxed -ml-10">
-                  Beacon is a real-time chat application I built to explore
-                  websockets for bidirectional communication. It uses Socket.io
-                  to handle instant messaging with minimal latency.PostgreSQL
-                  database to persist message history, ensuring conversations
-                  aren&apos;t lost when a user refreshes. Implemented Github
-                  OAuth to handle authentication and seamless login. Designed
-                  Designed a mobile-first, responsive UI in React, optimizing
-                  the chat experience for performance and usability on both
-                  desktop and mobile devices.
-                </div>
-                <Meteors number={20} />
-              </div>
-
-              <div className="flex flex-col space-x-3 w-full h-auto relative overflow-hidden bg-black rounded-lg  border-2 -mt-56 ">
-                <div className="flex flex-row justify-between items-center text-white font-spacemono  w-full  z-10 ">
-                  <div className="flex flex-row items-center justify-start  text-[2.8em] p-3 border-b w-full ">
-                    <span className="text-5xl ml-2 text-cyan-400">
-                      DataLog
-                      <a
-                        href="https://github.com/devangy/market"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-block align-middle"
-                      >
-                        <SquareArrowOutUpRight
-                          size={32}
-                          className="z-50 tilt-wobble-hover hover:scale-110 ml-10 -mt-1 hover:text-green-300 text-white border rounded-md "
-                        />
-                      </a>
-                    </span>
-                  </div>
-                </div>
-                <div className="flex font-jetbrains text-green-300 text-xl p-2 leading-relaxed ">
-                  DataLog is a Telegram Bot built with Golang and Telego. It
-                  provides notification alerts on new events with volume and
-                  whale alerts for tracking whale movements across two
-                  prediction markets Kalshi and Polymarket. It uses concurrent
-                  API polling system using goroutines, channels, and backoff
-                  retry logic to get contracts prices from both markets
-                  simultaneously. To prevent duplicates it uses a hashmap and
-                  automatically discards duplicates by comparing hashes.
-                </div>
-                <Meteors number={20} />
-              </div>
-
-              <div className="flex flex-col space-x-3 w-full h-auto relative overflow-hidden bg-black rounded-lg  border-2 -mt-56 ">
-                <div className="flex flex-row justify-between items-center text-white font-spacemono  w-full  z-10">
-                  <div className="flex flex-row items-center justify-start p-3 border-b w-full">
-                    <div className="flex items-center w-full flex-wrap ">
-                      <span className="text-5xl sm:text-5xl md:text-5xl lg:text-5xl text-cyan-400 ">
-                        LucidLines
-                      </span>
-                      <a
-                        href="https://github.com/devangy/LucidLines"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-shrink-0"
-                      >
-                        <SquareArrowOutUpRight
-                          size={32}
-                          className="z-50 tilt-wobble-hover hover:scale-110 hover:text-green-300 text-white rounded-md md:ml-8 md:mt-2 ml-4 border"
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex font-jetbrains text-green-300 text-xl p-2 leading-relaxed">
-                  LucidLines is a full-stack blogging platform with powerful
-                  admin management tools. I built the backend with Node.js and
-                  Express, PostgreSQL and Prisma ORM for queries, focusing on
-                  creating clean, efficient RESTful APIs to handle user data and
-                  Cloudinary for image uploads. Implemented full CRUD
-                  functionality, enabling users to publish, edit, and delete
-                  blogs, as well as engage through comments and likes.
-                </div>
-                <Meteors number={20} />
-              </div>
-            </div>
+          {/* Title */}
+          <div className="flex-1 text-right sm:text-center text-[11px] text-white/20 font-mono">
+            devang@mumbai — zsh
           </div>
         </div>
-      </div>
+      </nav>
+
+      <main className="max-w-5xl mx-auto px-5 sm:px-8 md:px-12">
+        {/* ══════ HERO ══════ */}
+        <section id="home" className="relative min-h-[85vh] flex items-center py-16 md:py-20">
+          {/* Background mandala */}
+          <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 opacity-[0.035] pointer-events-none select-none hidden lg:block">
+            <Mandala size={650} />
+          </div>
+
+          <div className="relative z-10 w-full">
+            <Prompt command="neofetch" />
+
+            <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16 mt-2">
+              {/* ASCII art - desktop */}
+              <FadeIn className="hidden lg:flex items-center justify-center flex-shrink-0" delay={0.2}>
+                <div className="opacity-60 hover:opacity-90 transition-opacity duration-500">
+                  <AsciiArt />
+                </div>
+              </FadeIn>
+
+              {/* Info block */}
+              <FadeIn className="flex flex-col gap-1">
+                {/* Name */}
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-spacemono leading-tight rgb-fade">
+                  Devang Yadav
+                </h1>
+
+                {/* Neofetch-style info */}
+                <div className="mt-6 space-y-1.5 text-[15px]">
+                  <div className="flex">
+                    <span className="text-saffron w-24 sm:w-28 flex-shrink-0">Role</span>
+                    <span className="text-white/25 mr-2">:</span>
+                    <span className="text-emerald-400">Fullstack Developer</span>
+                  </div>
+                  <div className="flex">
+                    <span className="text-saffron w-24 sm:w-28 flex-shrink-0">Location</span>
+                    <span className="text-white/25 mr-2">:</span>
+                    <span className="text-white/60">
+                      Mumbai,{" "}
+                      <span className="text-saffron">In</span>
+                      <span className="text-white">di</span>
+                      <span className="text-indian-green">a</span>
+                    </span>
+                  </div>
+                  <div className="flex">
+                    <span className="text-saffron w-24 sm:w-28 flex-shrink-0">OS</span>
+                    <span className="text-white/25 mr-2">:</span>
+                    <span className="text-white/60">Fedora Linux</span>
+                  </div>
+                  <div className="flex">
+                    <span className="text-saffron w-24 sm:w-28 flex-shrink-0">Shell</span>
+                    <span className="text-white/25 mr-2">:</span>
+                    <span className="text-white/60">zsh</span>
+                  </div>
+                  <div className="flex">
+                    <span className="text-saffron w-24 sm:w-28 flex-shrink-0">Uptime</span>
+                    <span className="text-white/25 mr-2">:</span>
+                    <span className="text-white/60">since 2023</span>
+                  </div>
+                </div>
+
+                {/* Color palette blocks (neofetch style) */}
+                <div className="flex gap-1 mt-5">
+                  {["#FF9933", "#ffffff", "#138808", "#000080", "#4ade80", "#22d3ee", "#f472b6", "#a78bfa"].map((c) => (
+                    <div key={c} className="w-5 h-5 rounded-sm" style={{ backgroundColor: c, opacity: 0.7 }} />
+                  ))}
+                </div>
+
+                {/* Social icons */}
+                <div className="flex items-center gap-5 mt-8">
+                  {socials.map(({ icon, url, label }) => (
+                    <a
+                      key={label}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="opacity-40 hover:opacity-100 transition-all duration-300 hover:scale-110"
+                    >
+                      <img src={icon} alt={label} className="w-6 h-6" draggable="false" />
+                    </a>
+                  ))}
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* ══════ ABOUT ══════ */}
+        <section>
+          <Prompt command="cat ./about.md" />
+          <FadeIn>
+            <div className="border-l-2 border-saffron/20 pl-6 ml-1">
+              <p className="text-white/60 text-lg leading-relaxed">
+                Hey! My name is{" "}
+                <span className="text-saffron">Devang Yadav</span>, a fullstack
+                developer based in <span className="text-red-300">Mumbai</span>,{" "}
+                <span className="text-saffron">In</span>
+                <span className="text-white">di</span>
+                <span className="text-indian-green">a</span>. My journey started in
+                2023 learning {"<html>"}, CSS and eventually transitioning to
+                Javascript and other frameworks for building web and mobile
+                applications. One of the major resources that helped me a lot and
+                I&apos;m thankful for was{" "}
+                <span className="text-cyan-400">
+                  The Odin Project &mdash; an opensource curriculum
+                </span>{" "}
+                for web development, the struggle was real with the Javascript
+                section spending time thinking and tinkering around and
+                understanding the concepts which at that time seemed hard but with
+                persistency I overcame it.
+                {!expandIntro && (
+                  <span
+                    className="inline-flex ml-2 px-3 py-0.5 text-sm bg-white/[0.04] border border-white/[0.08] rounded cursor-pointer hover:bg-white/[0.08] hover:text-saffron transition-all"
+                    onClick={() => setIntro(true)}
+                  >
+                    more...
+                  </span>
+                )}
+                {expandIntro && (
+                  <>
+                    {" "}
+                    It helped me distinguish between project based learning and
+                    tutorial hell early on. I always wanted to build stuff whether
+                    it was apps, lego houses or my own physique since I was little
+                    but never really got into it seriously until college &mdash;
+                    instead that time was wasted playing Counter Strike 10k hours
+                    lol, regrets but it was fun. I&apos;m always learning new
+                    technologies and reading about finance, markets etc. My core
+                    interests lie in Blockchain as I think Decentralization and
+                    smart contracts are the future. Systems programming is
+                    something I wanna get into and write my own Operating System
+                    someday for fun, something like TempleOS. Reverse engineering
+                    and malware analysis is another topic that I find interesting
+                    to read about.
+                    <span
+                      className="inline-flex ml-2 px-3 py-0.5 text-sm bg-white/[0.04] border border-white/[0.08] rounded cursor-pointer hover:bg-white/[0.08] hover:text-red-400 transition-all"
+                      onClick={() => setIntro(false)}
+                    >
+                      close
+                    </span>
+                  </>
+                )}
+              </p>
+            </div>
+          </FadeIn>
+        </section>
+
+        <Divider />
+
+        {/* ══════ TECHSTACK ══════ */}
+        <section id="skills">
+          <Prompt command="dnf list installed --techstack" />
+          <FadeIn>
+            <div className="flex flex-wrap gap-2.5">
+              {skills.map(({ name, icon }, i) => (
+                <motion.div
+                  key={name}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: i * 0.03 }}
+                  viewport={{ once: true }}
+                  whileHover={{
+                    scale: 1.06,
+                    backgroundColor: "rgba(255, 153, 51, 0.06)",
+                    borderColor: "rgba(255, 153, 51, 0.25)",
+                  }}
+                  className="flex items-center gap-2.5 px-3.5 py-2 bg-white/[0.025] border border-white/[0.07] rounded-md text-sm text-white/60 hover:text-white/90 transition-colors cursor-default"
+                >
+                  <img src={icon} alt={name} className="w-5 h-5 object-contain" />
+                  <span className="font-code">{name}</span>
+                </motion.div>
+              ))}
+            </div>
+          </FadeIn>
+        </section>
+
+        <Divider />
+
+        {/* ══════ EXPERIENCE ══════ */}
+        <section id="experience">
+          <Prompt command='git log --author="devang" --oneline' />
+          <FadeIn>
+            <div className="bg-white/[0.02] border border-white/[0.06] rounded-lg p-6">
+              <div className="flex items-center gap-3 flex-wrap">
+                <h3 className="text-2xl md:text-3xl font-spacemono text-saffron text-glow-saffron">
+                  Vighnotech
+                </h3>
+                <a
+                  href="https://vighnotech.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white/25 hover:text-saffron transition"
+                >
+                  <SquareArrowOutUpRight size={16} />
+                </a>
+              </div>
+
+              <div className="mt-2 text-xs font-mono space-y-0.5 text-white/30">
+                <p>
+                  <span className="text-yellow-400/50">commit</span> a3f2b1c
+                </p>
+                <p>
+                  <span className="text-yellow-400/50">Date:</span>{" "}
+                  Feb 2025 &mdash; Jul 2025
+                </p>
+              </div>
+
+              <p className="mt-5 text-white/50 text-base leading-relaxed">
+                My professional experience covers a range of projects, from
+                developing user-facing applications using React and React Native
+                to architecting the underlying backend services and CRM systems
+                with Node.js and PostgreSQL. I was primarily responsible for
+                creating and sustaining business automation tools and custom CRM
+                solutions that drove efficiency for clients in various industries.
+              </p>
+            </div>
+          </FadeIn>
+        </section>
+
+        <Divider />
+
+        {/* ══════ PROJECTS ══════ */}
+        <section id="projects">
+          <Prompt command="find ./projects -type d | head" />
+          <div className="space-y-6">
+            {projects.map((project, i) => (
+              <FadeIn key={project.name} delay={i * 0.1}>
+                <div className="relative overflow-hidden bg-white/[0.015] border border-white/[0.06] rounded-lg hover:border-saffron/15 transition-colors duration-500">
+                  {/* Mini terminal chrome */}
+                  <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/[0.05] bg-white/[0.015]">
+                    <div className="flex gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-[#ff5f57]/50" />
+                      <div className="w-2 h-2 rounded-full bg-[#febc2e]/50" />
+                      <div className="w-2 h-2 rounded-full bg-[#28c840]/50" />
+                    </div>
+                    <span className="text-white/20 text-xs font-mono ml-2">
+                      ~/projects/{project.name.toLowerCase()}
+                    </span>
+                  </div>
+
+                  <div className="p-5 sm:p-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <h3 className="text-2xl sm:text-3xl font-spacemono text-cyan-400">
+                        {project.name}
+                      </h3>
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/25 hover:text-saffron transition"
+                      >
+                        <SquareArrowOutUpRight size={18} />
+                      </a>
+                    </div>
+                    <p className="text-white/45 text-[15px] leading-relaxed">
+                      {project.desc}
+                    </p>
+                  </div>
+
+                  <Meteors number={15} />
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+
+        {/* ══════ FOOTER ══════ */}
+        <footer className="py-20 mt-20 border-t border-white/[0.05]">
+          <Prompt command='echo "&#x0928;&#x092E;&#x0938;&#x094D;&#x0924;&#x0947; &#x1F64F;"' />
+          <div className="ml-1 space-y-2">
+            <p className="text-white/20 text-sm font-mono">
+              Thanks for scrolling. Built with React + Vite on Fedora Linux.
+            </p>
+            <p className="text-white/10 text-xs font-mono">
+              &copy; {new Date().getFullYear()} Devang Yadav &middot; Mumbai, India
+            </p>
+          </div>
+        </footer>
+      </main>
     </div>
   );
 }

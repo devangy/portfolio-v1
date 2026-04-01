@@ -3,35 +3,24 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./src/components/**/*.{js,jsx}",
   ],
 
   theme: {
     extend: {
       colors: {
-        transparent: "transparent",
-        current: "currentColor",
-        white: "#FFFFFF",
-        primaryStart: "#262F96",
-        primaryEnd: "#1E204F",
-        customBlue: "#1E90FF",
-        customGray: "#F0F0F0",
+        saffron: "#FF9933",
+        "indian-green": "#138808",
+        surface: {
+          DEFAULT: "#111111",
+          light: "#1a1a1a",
+        },
       },
 
       fontFamily: {
         code: ['"Fira Code"', "monospace"],
         jetbrains: ["'JetBrains Mono'", "monospace"],
         spacemono: ['"Space Mono"', "monospace"],
-        geistmono: ['Geist Mono', 'monospace'],
-      },
-
-      backgroundImage: {
-        "custom-gradient": "linear-gradient(to bottom, #262F96, #1E204F)",
-      },
-
-      boxShadow: {
-        custom:
-          "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+        geistmono: ["Geist Mono", "monospace"],
       },
 
       animation: {

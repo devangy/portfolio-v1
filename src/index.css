@@ -2,14 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Enable ligatures for Fira Code */
-.font-ligatures {
-  font-variant-ligatures: common-ligatures;
+:root {
+  background-color: #0a0a0a;
+  color-scheme: dark;
 }
 
-/* Custom Styles */
-:root {
-  background-color: #162a2a; /* Example color */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #FF993330 transparent;
+}
+
+::selection {
+  background: rgba(255, 153, 51, 0.2);
+  color: #fff;
 }
 
 @font-face {
@@ -42,49 +47,95 @@
   font-family: "Geist Mono";
   src: local("GeistMono-Medium"),
        url("/fonts/GeistMono-Medium.ttf") format("truetype");
-  font-weight: 100;
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
-
-
-@keyframes tilt-wobble {
-  0% {
-    transform: rotate(0deg) scale(1);
-  }
-  25% {
-    transform: rotate(-10deg) scale(1.05);
-  }
-  50% {
-    transform: rotate(10deg) scale(1.05);
-  }
-  75% {
-    transform: rotate(-6deg) scale(1.03);
-  }
-  100% {
-    transform: rotate(0deg) scale(1);
-  }
+/* Terminal cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
+.terminal-cursor {
+  animation: cursor-blink 1s step-end infinite;
+  color: #4ade80;
+  font-weight: 300;
+}
 
+/* Mandala rotation */
+@keyframes mandala-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.mandala-spin {
+  animation: mandala-spin 120s linear infinite;
+}
+
+/* Tilt wobble for icons */
+@keyframes tilt-wobble {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.05); }
+  50% { transform: rotate(10deg) scale(1.05); }
+  75% { transform: rotate(-6deg) scale(1.03); }
+  100% { transform: rotate(0deg) scale(1); }
+}
 
 .tilt-wobble-hover:hover {
   animation: tilt-wobble 0.5s ease-in-out;
 }
 
-
-
-@keyframes rgb-fade-soft {
-  0%   { color: #fee2e2; }   /* red-100 */
-  20%  { color: #fef9c3; }   /* yellow-100 */
-  40%  { color: #d9f99d; }   /* lime-100 */
-  60%  { color: #bfdbfe; }   /* blue-100 */
-  80%  { color: #f5d0fe; }   /* purple-100 */
-  100% { color: #fee2e2; }   /* red-100 */
+/* Subtle scanline overlay */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
 }
 
-.rgb-fade-soft {
-  animation: rgb-fade-soft 8s ease-in-out infinite;
+.scanline::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 153, 51, 0.008) 2px,
+    rgba(255, 153, 51, 0.008) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
 }
 
+/* Smooth RGB color fade for name */
+@keyframes rgb-fade {
+  0%   { color: #FF9933; text-shadow: 0 0 30px rgba(255, 153, 51, 0.2); }
+  15%  { color: #f472b6; text-shadow: 0 0 30px rgba(244, 114, 182, 0.2); }
+  30%  { color: #a78bfa; text-shadow: 0 0 30px rgba(167, 139, 250, 0.2); }
+  45%  { color: #22d3ee; text-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
+  60%  { color: #4ade80; text-shadow: 0 0 30px rgba(74, 222, 128, 0.2); }
+  75%  { color: #facc15; text-shadow: 0 0 30px rgba(250, 204, 21, 0.2); }
+  100% { color: #FF9933; text-shadow: 0 0 30px rgba(255, 153, 51, 0.2); }
+}
+
+.rgb-fade {
+  animation: rgb-fade 8s ease-in-out infinite;
+}
+
+/* Glow effect for section headers */
+.text-glow-saffron {
+  text-shadow: 0 0 30px rgba(255, 153, 51, 0.15);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Meteor effect */
+@keyframes meteor {
+  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
+}
