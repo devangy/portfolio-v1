@@ -72,7 +72,7 @@ function App() {
 
       <button
         onClick={() => setPlaying((p) => !p)}
-        className="fixed top-5 left-5 z-50 w-11 h-11 rounded-full grid place-items-center bg-white/[0.04] backdrop-blur-md border border-white/10 hover:border-cyan-300/40 hover:bg-white/[0.08] transition-all"
+        className="fixed top-5 left-5 z-50 w-11 h-11 rounded-full hidden sm:grid place-items-center bg-white/[0.04] backdrop-blur-md border border-white/10 hover:border-cyan-300/40 hover:bg-white/[0.08] transition-all"
         aria-label={playing ? "Stop music" : "Play music"}
       >
         {playing ? <Volume2 size={18} className="text-cyan-300" /> : <VolumeX size={18} className="text-white/70" />}
@@ -129,7 +129,7 @@ function App() {
           )}
         </AnimatePresence>
 
-        <footer className="pt-10 pb-2 text-center text-[11px] text-white/30 font-jetbrains">
+        <footer className="sm:pt-10 sm:pb-2 sm:static sm:bg-transparent sm:backdrop-blur-none sm:z-auto fixed bottom-0 left-0 right-0 py-3 z-40 text-center text-[11px] text-white/30 font-jetbrains bg-black/70 backdrop-blur-md border-t border-white/[0.05] sm:border-none">
           © {new Date().getFullYear()} Devang Yadav · forged in Mumbai ·{" "}
           <span className="bg-gradient-to-r from-cyan-300 via-emerald-300 to-sky-300 bg-clip-text text-transparent">
             keep building
@@ -467,69 +467,68 @@ const ProjectsCard = () => (
         return (
           <div
             key={p.name}
-            className="group flex gap-4 rounded-xl p-3 sm:p-4 bg-white/[0.02] border border-white/[0.06] hover:border-white/20 hover:bg-white/[0.04] transition-all"
+            className="group rounded-xl p-3 sm:p-4 bg-white/[0.02] border border-white/[0.06] hover:border-white/20 hover:bg-white/[0.04] transition-all"
           >
-            <div className={`relative shrink-0 w-20 h-20 sm:w-24 sm:h-24 self-start rounded-lg overflow-hidden border border-white/[0.08] bg-gradient-to-br ${PREVIEW_GRADIENTS[accent]} grid place-items-center`}>
-              <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:10px_10px]" />
-              <span className={`relative text-3xl sm:text-4xl ${PREVIEW_TEXT[accent]} drop-shadow-[0_0_12px_currentColor]`}>
-                {glyph}
-              </span>
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-start justify-between gap-2">
-                <span
-                  className={`text-[12px] uppercase tracking-[0.18em] font-jetbrains ${
-                    accent === "cyan" ? "text-cyan-300" : accent === "emerald" ? "text-emerald-300" : "text-sky-300"
-                  }`}
+            {/* Header: icon + name/tag + buttons */}
+            <div className="flex items-center gap-2.5">
+              <div className={`relative shrink-0 w-10 h-10 sm:w-14 sm:h-14 rounded-lg overflow-hidden border border-white/[0.08] bg-gradient-to-br ${PREVIEW_GRADIENTS[accent]} grid place-items-center`}>
+                <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:10px_10px]" />
+                <span className={`relative text-lg sm:text-2xl ${PREVIEW_TEXT[accent]} drop-shadow-[0_0_12px_currentColor]`}>{glyph}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="text-[15px] sm:text-[19px] text-white font-spacemono leading-tight truncate">{p.name}</div>
+                <div className={`mt-0.5 text-[10px] sm:text-[12px] uppercase tracking-[0.15em] font-jetbrains ${accent === "cyan" ? "text-cyan-300" : accent === "emerald" ? "text-emerald-300" : "text-sky-300"}`}>{p.tag}</div>
+              </div>
+              <div className="flex items-center gap-1 shrink-0">
+                <a
+                  href={p.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-jetbrains bg-white/[0.04] border border-white/[0.1] text-white/65 hover:text-white hover:border-white/30 hover:bg-white/[0.08] transition-all"
                 >
-                  {p.tag}
+                  <Github size={10} /> GitHub
+                </a>
+                <a
+                  href={p.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-jetbrains border transition-all ${chipColor.bg} ${chipColor.border} ${chipColor.text} hover:opacity-90`}
+                  style={{ textShadow: `0 0 8px ${chipColor.shadow}` }}
+                >
+                  <ExternalLink size={10} /> Live
+                </a>
+              </div>
+            </div>
+
+            {/* Description */}
+            <p className="mt-2 text-[11.5px] sm:text-[15px] text-white/55 leading-snug sm:leading-relaxed">{p.desc}</p>
+
+            {/* Bullets */}
+            {p.bullets && (
+              <>
+                <div className="mt-2 border-t border-white/[0.07]" />
+                <ul className="mt-2 space-y-1.5 sm:space-y-2.5">
+                  {p.bullets.map((b, bi) => (
+                    <li key={bi} className="flex gap-1.5 text-[11px] sm:text-[16px] text-white/60 leading-snug sm:leading-relaxed">
+                      <span className={`mt-[5px] shrink-0 w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full ${ACCENT_DOT[accent]} opacity-65 shadow-[0_0_5px_currentColor]`} />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {/* Stack chips */}
+            <div className="mt-2 sm:mt-3 flex flex-wrap gap-1 sm:gap-1.5">
+              {p.stack.map((s) => (
+                <span
+                  key={s}
+                  className={`text-[9.5px] sm:text-[13px] px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border font-jetbrains ${chipColor.text} ${chipColor.border} ${chipColor.bg}`}
+                  style={{ textShadow: `0 0 8px ${chipColor.shadow}` }}
+                >
+                  {s}
                 </span>
-                <div className="flex items-center gap-1.5 shrink-0">
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-jetbrains bg-white/[0.04] border border-white/[0.1] text-white/65 hover:text-white hover:border-white/30 hover:bg-white/[0.08] transition-all"
-                  >
-                    <Github size={11} /> GitHub
-                  </a>
-                  <a
-                    href={p.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-jetbrains border transition-all ${chipColor.bg} ${chipColor.border} ${chipColor.text} hover:opacity-90`}
-                    style={{ textShadow: `0 0 8px ${chipColor.shadow}` }}
-                  >
-                    <ExternalLink size={11} /> Live
-                  </a>
-                </div>
-              </div>
-              <div className="mt-1 text-[19px] text-white font-spacemono">{p.name}</div>
-              <p className="mt-1 text-[15px] text-white/55 leading-relaxed">{p.desc}</p>
-              {p.bullets && (
-                <>
-                  <div className="mt-3 border-t border-white/[0.07]" />
-                  <ul className="mt-3 space-y-2.5">
-                    {p.bullets.map((b, bi) => (
-                      <li key={bi} className="flex gap-2.5 text-[16px] text-white/65 leading-relaxed">
-                        <span className={`mt-[8px] shrink-0 w-1.5 h-1.5 rounded-full ${ACCENT_DOT[accent]} opacity-65 shadow-[0_0_5px_currentColor]`} />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {p.stack.map((s) => (
-                  <span
-                    key={s}
-                    className={`text-[13px] px-3 py-1 rounded-full border font-jetbrains ${chipColor.text} ${chipColor.border} ${chipColor.bg}`}
-                    style={{ textShadow: `0 0 8px ${chipColor.shadow}` }}
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         );
