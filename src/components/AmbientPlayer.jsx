@@ -15,9 +15,12 @@ export const AmbientPlayer = ({ muted }) => {
       ctx.resume();
       s.ctx = ctx;
 
+      const isMobile = window.innerWidth < 768;
+      const targetGain = isMobile ? 0.55 : 0.22;
+
       const master = ctx.createGain();
       master.gain.setValueAtTime(0, ctx.currentTime);
-      master.gain.linearRampToValueAtTime(0.22, ctx.currentTime + 4);
+      master.gain.linearRampToValueAtTime(targetGain, ctx.currentTime + 4);
       master.connect(ctx.destination);
       s.master = master;
 

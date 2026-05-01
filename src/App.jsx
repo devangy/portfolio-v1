@@ -63,7 +63,7 @@ const TABS = ["home", "portfolio", "contact"];
 
 function App() {
   const [tab, setTab] = useState("home");
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
 
   return (
     <div className="relative min-h-screen bg-black text-white font-jetbrains overflow-x-clip selection:bg-cyan-400/30">
@@ -72,10 +72,10 @@ function App() {
 
       <button
         onClick={() => setPlaying((p) => !p)}
-        className="fixed top-5 left-5 z-50 w-11 h-11 rounded-full hidden sm:grid place-items-center bg-white/[0.04] backdrop-blur-md border border-white/10 hover:border-cyan-300/40 hover:bg-white/[0.08] transition-all"
+        className="fixed top-4 left-4 sm:top-5 sm:left-5 z-50 w-8 h-8 sm:w-11 sm:h-11 rounded-full grid place-items-center bg-white/[0.04] backdrop-blur-md border border-white/10 hover:border-cyan-300/40 hover:bg-white/[0.08] transition-all"
         aria-label={playing ? "Stop music" : "Play music"}
       >
-        {playing ? <Volume2 size={18} className="text-cyan-300" /> : <VolumeX size={18} className="text-white/70" />}
+        {playing ? <Volume2 size={15} className="text-cyan-300" /> : <VolumeX size={15} className="text-white/70" />}
       </button>
 
       <FloatingNav active={tab} onChange={setTab} />
