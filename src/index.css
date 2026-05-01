@@ -3,17 +3,21 @@
 @tailwind utilities;
 
 :root {
-  background-color: #0a0a0a;
+  background-color: #050507;
   color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: #FF993330 transparent;
+  scrollbar-color: #00f0ff30 transparent;
 }
 
 ::selection {
-  background: rgba(255, 153, 51, 0.2);
+  background: rgba(0, 240, 255, 0.25);
   color: #fff;
 }
 
@@ -21,7 +25,6 @@
   font-family: "Space Mono";
   src: url("/fonts/SpaceMono-Regular.ttf") format("truetype");
   font-weight: 400;
-  font-style: normal;
   font-display: swap;
 }
 
@@ -30,16 +33,6 @@
   src: local("Geist Mono"), local("GeistMono-Regular"),
        url("/fonts/GeistMono-Regular.ttf") format("truetype");
   font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Geist Mono";
-  src: local("GeistMono-Light"),
-       url("/fonts/GeistMono-Light.ttf") format("truetype");
-  font-weight: 100;
-  font-style: normal;
   font-display: swap;
 }
 
@@ -48,51 +41,42 @@
   src: local("GeistMono-Medium"),
        url("/fonts/GeistMono-Medium.ttf") format("truetype");
   font-weight: 500;
-  font-style: normal;
   font-display: swap;
 }
 
-/* Terminal cursor blink */
+/* ─── Terminal cursor ─── */
 @keyframes cursor-blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-
 .terminal-cursor {
   animation: cursor-blink 1s step-end infinite;
-  color: #4ade80;
-  font-weight: 300;
+  color: #b5ff00;
 }
 
-/* Mandala rotation */
-@keyframes mandala-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* ─── Animated gradient name ─── */
+@keyframes gradient-pan {
+  0%   { background-position:   0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position:   0% 50%; }
+}
+.text-vibrant {
+  background: linear-gradient(
+    90deg,
+    #00f0ff 0%,
+    #9d4dff 25%,
+    #ff2bd6 50%,
+    #ff9933 75%,
+    #00f0ff 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 9s ease-in-out infinite;
 }
 
-.mandala-spin {
-  animation: mandala-spin 120s linear infinite;
-}
-
-/* Tilt wobble for icons */
-@keyframes tilt-wobble {
-  0% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(-10deg) scale(1.05); }
-  50% { transform: rotate(10deg) scale(1.05); }
-  75% { transform: rotate(-6deg) scale(1.03); }
-  100% { transform: rotate(0deg) scale(1); }
-}
-
-.tilt-wobble-hover:hover {
-  animation: tilt-wobble 0.5s ease-in-out;
-}
-
-/* Subtle scanline overlay */
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
+/* ─── Scanline overlay (subtle) ─── */
 .scanline::after {
   content: "";
   position: fixed;
@@ -101,41 +85,143 @@
     0deg,
     transparent,
     transparent 2px,
-    rgba(255, 153, 51, 0.008) 2px,
-    rgba(255, 153, 51, 0.008) 4px
+    rgba(0, 240, 255, 0.012) 2px,
+    rgba(0, 240, 255, 0.012) 4px
   );
   pointer-events: none;
   z-index: 9999;
 }
 
-/* Smooth RGB color fade for name */
-@keyframes rgb-fade {
-  0%   { color: #FF9933; text-shadow: 0 0 30px rgba(255, 153, 51, 0.2); }
-  15%  { color: #f472b6; text-shadow: 0 0 30px rgba(244, 114, 182, 0.2); }
-  30%  { color: #a78bfa; text-shadow: 0 0 30px rgba(167, 139, 250, 0.2); }
-  45%  { color: #22d3ee; text-shadow: 0 0 30px rgba(34, 211, 238, 0.2); }
-  60%  { color: #4ade80; text-shadow: 0 0 30px rgba(74, 222, 128, 0.2); }
-  75%  { color: #facc15; text-shadow: 0 0 30px rgba(250, 204, 21, 0.2); }
-  100% { color: #FF9933; text-shadow: 0 0 30px rgba(255, 153, 51, 0.2); }
+/* ─── Conic neon border for cards ─── */
+@keyframes border-rotate {
+  to { --angle: 360deg; }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.neon-border {
+  position: relative;
+  isolation: isolate;
+}
+.neon-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 0%,
+    rgba(0, 240, 255, 0.45) 12%,
+    transparent 25%,
+    rgba(255, 43, 214, 0.45) 50%,
+    transparent 65%,
+    rgba(255, 153, 51, 0.45) 85%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: border-rotate 8s linear infinite;
+  opacity: 0.55;
 }
 
-.rgb-fade {
-  animation: rgb-fade 8s ease-in-out infinite;
+/* ─── Glass card surface ─── */
+.glass {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 
-/* Glow effect for section headers */
-.text-glow-saffron {
-  text-shadow: 0 0 30px rgba(255, 153, 51, 0.15);
+/* ─── Stack-of-cards depth (mobile peek) ─── */
+.stack-card {
+  position: relative;
+}
+.stack-card::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -10px;
+  height: 14px;
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6), transparent);
+  filter: blur(8px);
+  z-index: -1;
+  pointer-events: none;
+}
+@media (min-width: 768px) {
+  .stack-card::after { display: none; }
 }
 
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
+/* ─── Tag chip shimmer on hover ─── */
+.shimmer-on-hover {
+  position: relative;
+  overflow: hidden;
 }
+.shimmer-on-hover::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(0, 240, 255, 0.2) 50%,
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.7s ease;
+}
+.shimmer-on-hover:hover::after { transform: translateX(120%); }
 
-/* Meteor effect */
+/* ─── Meteor (legacy) ─── */
 @keyframes meteor {
   0% { transform: rotate(215deg) translateX(0); opacity: 1; }
   70% { opacity: 1; }
   100% { transform: rotate(215deg) translateX(-500px); opacity: 0; }
+}
+
+/* ─── Marquee mask ─── */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* ─── ASCII corner decoration ─── */
+.ascii-corner {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: -1px;
+  color: rgba(0, 240, 255, 0.25);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* ─── Skill chip click shine ─── */
+@keyframes skill-shine {
+  0% { transform: translateX(-110%); opacity: 0.9; }
+  100% { transform: translateX(110%); opacity: 0; }
+}
+@keyframes skill-glow {
+  0% { opacity: 0.95; }
+  100% { opacity: 0; }
+}
+
+/* ─── Reduced motion respect ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
